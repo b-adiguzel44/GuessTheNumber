@@ -25,14 +25,17 @@ def game(start=0, finish=100, max_count=10):
     flag = False
     ilk, son = start, finish
     i = 1
+    sayi = -1
     # print("Tutulan sayı : %i"%tutulan_sayi) # --> Tutulan sayıyı baştan görmek istiyor
     while i <= max_count:
 
         print("%i/%i attempts [ %i - %i ] : " % (i, max_count, ilk, son), end='')
         try:
-            sayi = int(input(""))
+            sayi = int(input())
         except ValueError:
-            print('Enter a number')
+            continue
+        except UnboundLocalError:
+            continue
         if tutulan_sayi > sayi and ilk < sayi:
             ilk = sayi
         elif tutulan_sayi < sayi and son > sayi:
@@ -55,12 +58,15 @@ def game(start=0, finish=100, max_count=10):
 def default_game_menu(answer):
     '''Varsayılan oyun ayarları ile oynanılacak mı oynanılmayacak mı kontrol metodu'''
 
+    # Kabul görecek list
+    check_list = {"Y", "y", "N", "n", ""}
+
     try:
-        assert type(answer) == str and len(answer) == 1
+        assert type(answer) == str
     except AssertionError:
         return False
     else:
-        if answer == "y" or answer == "Y" or answer == "n" or answer == "N":
+        if answer in check_list:
             return True
         else:
             return False
@@ -83,7 +89,7 @@ if __name__ == "__main__":
         input_ = input(question)
         terminal_clean()
 
-        if input_ == "y":
+        if input_ == "y" or input_ == "":
 
             while not is_game_finished:
                 print("Default settings (Between 0-100, 10 attempts)")
@@ -94,7 +100,7 @@ if __name__ == "__main__":
                 if state:
 
                     terminal_clean()
-                    if selection == "y" or selection == "Y":
+                    if selection == "y" or selection == "Y" or selection == "":
                         game()
                         is_game_finished = True
                     elif selection == "n" or selection == "N":
