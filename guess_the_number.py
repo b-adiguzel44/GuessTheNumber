@@ -33,9 +33,9 @@ def game(start=0, finish=100, max_count=10):
         try:
             sayi = int(input())
         except ValueError:
-            continue
+            pass
         except UnboundLocalError:
-            continue
+            pass
         if tutulan_sayi > sayi and ilk < sayi:
             ilk = sayi
         elif tutulan_sayi < sayi and son > sayi:
