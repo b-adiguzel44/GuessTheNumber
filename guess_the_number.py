@@ -1,4 +1,3 @@
-import decimal
 import random
 import time
 import os
@@ -58,7 +57,11 @@ def game(start=0, finish=100, max_count=10):
 def default_game_menu(answer):
     '''Varsayılan oyun ayarları ile oynanılacak mı oynanılmayacak mı kontrol metodu'''
 
-    # Kabul görecek list
+    # Kabul görülen girişlerin listesi
+    # Stringlerin içi eğer boş ise False, dolu ise True value değerleri döndürürler
+    # ÖRNEK :
+    # string_ex = ""    -->     False
+    # string_ex = "5"   -->     True
     check_list = {"Y", "y", "N", "n", ""}
 
     try:
@@ -100,7 +103,9 @@ if __name__ == "__main__":
                 if state:
 
                     terminal_clean()
-                    if selection == "y" or selection == "Y" or selection == "":
+                    # string lerin içi boş ise False değeri döndürürler
+                    # selection objesisi string dir
+                    if selection == "y" or selection == "Y" or not selection:
                         game()
                         is_game_finished = True
                     elif selection == "n" or selection == "N":
@@ -140,8 +145,12 @@ if __name__ == "__main__":
             time.sleep(1)
             exit(0)
 
+        elif input_ == "mrugur":
+            print("Cultured gaming", "Cultured gaming", sep="\n")
+
         else:
             print("Incorrect input!")
 
         is_game_finished = False
-        continue_question = True
+        if not continue_question:
+            continue_question = True
